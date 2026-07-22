@@ -1,0 +1,510 @@
+R1:
+  pid:
+    # about pid
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 2.8
+    PID_x_KP: 2.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.8
+    PID_y_KP: 1.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 1.5
+    PID_yaw_KP: 2.8
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.1
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                             # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.8 # 0.8                              # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.05                          # 是否到达目标附近的容忍度
+
+    speed_default: 0.5
+    speed_max: 2.4
+    a_max: 0.8
+    omega_max: 0.5
+
+    accurateThresholdRotate_x: 0.2
+    accurateThresholdRotate_y: 0.2
+    accurateThresholdRotate_yaw: 0.2
+
+    accurateThresholdAdjust_x: 0.25
+    accurateThresholdAdjust_y: 0.25
+    accurateThresholdAdjust_yaw: 0.25
+
+    accurateThresholdKeeping_x: 0.15
+    accurateThresholdKeeping_y: 0.15
+    accurateThresholdKeeping_yaw: 0.15
+
+
+A2:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 3.5
+    PID_x_KP: 3.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.1
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.8
+    PID_yaw_KP: 2.5
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.80 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.5                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.8
+    speed_max: 2.5
+    a_max: 0.60
+    omega_max: 0.6
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.05
+    accurateThresholdAdjust_y: 0.05
+    accurateThresholdAdjust_yaw: 0.05
+
+    accurateThresholdKeeping_x: 0.05
+    accurateThresholdKeeping_y: 0.05
+    accurateThresholdKeeping_yaw: 0.1
+
+A2_W:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 3.5
+    PID_x_KP: 3.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.1
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.8
+    PID_yaw_KP: 2.5
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.80 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.5                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.8
+    speed_max: 2.5
+    a_max: 0.60
+    omega_max: 0.6
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.05
+    accurateThresholdAdjust_y: 0.05
+    accurateThresholdAdjust_yaw: 0.05
+
+    accurateThresholdKeeping_x: 0.05
+    accurateThresholdKeeping_y: 0.05
+    accurateThresholdKeeping_yaw: 0.1
+
+B2:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.6
+    PID_x_Vmax: 1.8
+    PID_x_KP: 4.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.3
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.8
+    PID_yaw_KP: 2.5
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.3
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.30 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.5                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.9
+    speed_max: 1.5
+    a_max: 0.8
+    omega_max: 0.6
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.05
+    accurateThresholdAdjust_y: 0.05
+    accurateThresholdAdjust_yaw: 0.05
+
+    accurateThresholdKeeping_x: 0.05
+    accurateThresholdKeeping_y: 0.05
+    accurateThresholdKeeping_yaw: 0.1
+
+
+B2_W:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 1.0
+    PID_x_Vmax: 3.5
+    PID_x_KP: 4.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.5
+    PID_y_KP: 2.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 1.0
+    PID_yaw_KP: 2.5
+    PID_yaw_KI: 1.0
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.4 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.3                           # 是否到达目标附近的容忍度
+
+    speed_default: 1.8
+    speed_max: 3.5
+    a_max: 1.0
+    omega_max: 0.5
+
+    accurateThresholdRotate_x: 0.2
+    accurateThresholdRotate_y: 0.2
+    accurateThresholdRotate_yaw: 0.25
+
+    accurateThresholdAdjust_x: 0.1
+    accurateThresholdAdjust_y: 0.1
+    accurateThresholdAdjust_yaw: 0.1
+
+    accurateThresholdKeeping_x: 0.05
+    accurateThresholdKeeping_y: 0.05
+    accurateThresholdKeeping_yaw: 0.15
+
+G1:
+  pid:
+    # about pid
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 2.8
+    PID_x_KP: 2.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.8
+    PID_y_KP: 1.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.85
+    PID_yaw_KP: 2.0
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.1
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                             # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 0.8 # 0.8                              # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.2                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.35
+    speed_max: 2.4
+    a_max: 0.5
+    omega_max: 0.5
+
+    accurateThresholdRotate_x: 0.2
+    accurateThresholdRotate_y: 0.2
+    accurateThresholdRotate_yaw: 0.2
+
+    accurateThresholdAdjust_x: 0.25
+    accurateThresholdAdjust_y: 0.25
+    accurateThresholdAdjust_yaw: 0.25
+
+    accurateThresholdKeeping_x: 0.15
+    accurateThresholdKeeping_y: 0.15
+    accurateThresholdKeeping_yaw: 0.15
+
+
+Go2:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 1.8
+    PID_x_KP: 2.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 1.8
+    PID_yaw_KP: 8.0
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 1.0 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.3                           # 是否到达目标附近的容忍度
+
+    speed_default: 1.2
+    speed_max: 1.51
+    a_max: 1.2
+    omega_max: 0.6
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.1
+    accurateThresholdAdjust_y: 0.1
+    accurateThresholdAdjust_yaw: 0.15
+
+    accurateThresholdKeeping_x: 0.15
+    accurateThresholdKeeping_y: 0.15
+    accurateThresholdKeeping_yaw: 0.15
+
+
+Go2_W:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 1.8
+    PID_x_KP: 2.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.8
+    PID_yaw_KP: 2.0
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 1.0 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.3                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.35
+    speed_max: 0.4
+    a_max: 0.5
+    omega_max: 0.5
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.1
+    accurateThresholdAdjust_y: 0.1
+    accurateThresholdAdjust_yaw: 0.15
+
+    accurateThresholdKeeping_x: 0.15
+    accurateThresholdKeeping_y: 0.15
+    accurateThresholdKeeping_yaw: 0.15
+
+
+H1:
+  pid:
+    ctrl_rate: 50 #hz
+
+    # x方向
+    PID_x_Limmax: 0.2
+    PID_x_Vmax: 1.8
+    PID_x_KP: 2.5
+    PID_x_KI: 1.5
+    PID_x_KD: 0.0
+
+    # y方向
+    PID_y_Limmax: 0.2
+    PID_y_Vmax: 0.7
+    PID_y_KP: 3.5
+    PID_y_KI: 1.0
+    PID_y_KD: 0.0
+    # yaw
+    PID_yaw_Limmax: 0.2
+    PID_yaw_Vmax: 0.8
+    PID_yaw_KP: 2.0
+    PID_yaw_KI: 1.5
+    PID_yaw_KD: 0.0
+
+    # about threshold
+    # x方向
+    threshold_x: 0.02
+    # y方向
+    threshold_y: 0.02
+    # yaw
+    threshold_yaw: 0.02
+
+  ctrl:
+    CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+    # Planner 参数设置
+    Planner/pub_rate: 40.0                                     # 节点发布频率
+    Planner/forwardDis: 1.0 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+    Planner/transform_tolerance: 0.3                           # 是否到达目标附近的容忍度
+
+    speed_default: 0.5
+    speed_max: 0.8
+    a_max: 0.6
+    omega_max: 0.5
+
+    accurateThresholdRotate_x: 0.1
+    accurateThresholdRotate_y: 0.1
+    accurateThresholdRotate_yaw: 0.15
+
+    accurateThresholdAdjust_x: 0.15
+    accurateThresholdAdjust_y: 0.15
+    accurateThresholdAdjust_yaw: 0.15
+
+    accurateThresholdKeeping_x: 0.05
+    accurateThresholdKeeping_y: 0.05
+    accurateThresholdKeeping_yaw: 0.15

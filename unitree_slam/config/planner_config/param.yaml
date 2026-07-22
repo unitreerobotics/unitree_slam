@@ -1,0 +1,20 @@
+
+  CurvatureSamplingInterval: 0.2                               # 曲率离散点采样间隔   pid 巡迹使用
+
+  # Planner 参数设置
+  Planner/pub_rate: 40.0                                     # 节点发布频率
+  Planner/forwardDis: 1.0 # 0.6                                     # 搜索的最佳追踪点到当前位置的最远距离
+  Planner/transform_tolerance: 0.3                           # 是否到达目标附近的容忍度
+
+  accurateThresholdRotate_x: 0.1
+  accurateThresholdRotate_y: 0.1
+  accurateThresholdRotate_yaw: 0.15
+  
+  accurateThresholdAdjust_x: 0.05
+  accurateThresholdAdjust_y: 0.05
+  accurateThresholdAdjust_yaw: 0.05
+
+  accurateThresholdKeeping_x: 0.05
+  accurateThresholdKeeping_y: 0.05
+  accurateThresholdKeeping_yaw: 0.15
+  

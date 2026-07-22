@@ -1,0 +1,212 @@
+A2:
+  lid_topic: "rt/unitree/slam_lidar/points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/unitree/slam_lidar/imu1"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  img_en: 0                                  #invalid
+  lidar_en: 1
+  ros_driver_bug_fix: false
+  extrinsic_T: [0.0, 0.0, 0.0] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.33767, 0.0, 0.08134] #imu2baselink
+  imu2baselink_R: [0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+  imu_time_offset: 0.0
+  filter_size_surf: 0.1
+  exposure_estimate_en: true
+  inv_expo_cov: 0.1
+  imu_en: true
+  imu_int_frame: 30
+  acc_cov: 0.5 # 0.5
+  gyr_cov: 0.3 # 0.3
+  b_acc_cov: 0.0001 # 0.0001
+  b_gyr_cov: 0.0001 # 0.0001
+  imu_rate_odom: false
+  gravity_align_en: true
+  dense_map_en: true
+  lidar_time_offset: 0.0
+  gravity_est_en: true
+  ba_bg_est_en: true
+  hilti_en: false
+  max_speed: 3.5 # m/s
+  max_pcd_frame: 3200 # max pcd frame
+  # pre
+  feature_extract_enabled: false 
+  point_filter_num: 5
+  scan_line: 128
+  lidar_type: 9 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32,9=jt128
+  lidar_min_dist: 0.8
+  lidar_max_dist: 30.0
+  # voxel
+  pub_plane_en: false
+  max_layer: 2
+  voxel_size: 0.5
+  min_eigen_value: 0.0025 # 0.0025
+  sigma_num: 3.0
+  beam_err: 0.05 #0.05
+  dept_err: 0.02 #0.02
+  layer_init_num: [5, 5, 5, 5, 5]
+  max_points_num: 50
+  max_iterations: 5
+  map_sliding_en: false
+  half_map_size: 100
+  sliding_thresh: 8.0
+
+B2:
+  lid_topic: "rt/rslidar_points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/dog_imu_raw"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  img_en: 0                                  #invalid
+  lidar_en: 1
+  ros_driver_bug_fix: false
+  extrinsic_T: [0.34218, -0.02341, 0.12924] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu_time_offset: 0.0
+  filter_size_surf: 0.1
+  exposure_estimate_en: true
+  inv_expo_cov: 0.1
+  imu_en: true
+  imu_int_frame: 30
+  acc_cov: 2.5 # 0.5
+  gyr_cov: 1.8 # 0.3
+  b_acc_cov: 0.001 # 0.0001
+  b_gyr_cov: 0.001 # 0.0001
+  imu_rate_odom: false
+  gravity_align_en: true
+  dense_map_en: true
+  lidar_time_offset: -0.1
+  gravity_est_en: true
+  ba_bg_est_en: true
+  hilti_en: false
+  max_speed: 2.0 # m/s
+  max_pcd_frame: 3200 # max pcd frame
+  # pre
+  feature_extract_enabled: false 
+  point_filter_num: 5
+  scan_line: 32
+  lidar_type: 8 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32
+  lidar_min_dist: 0.8
+  lidar_max_dist: 60.0
+  # voxel
+  pub_plane_en: false
+  max_layer: 2
+  voxel_size: 0.5
+  min_eigen_value: 0.0025 # 0.0025
+  sigma_num: 3.0
+  beam_err: 0.05 #0.05
+  dept_err: 0.02 #0.02
+  layer_init_num: [5, 5, 5, 5, 5]
+  max_points_num: 50
+  max_iterations: 5
+  map_sliding_en: false
+  half_map_size: 100
+  sliding_thresh: 8.0
+
+B2_W:
+  lid_topic: "rt/rslidar_points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/dog_imu_raw"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  img_en: 0                                  #invalid
+  lidar_en: 1
+  ros_driver_bug_fix: false
+  extrinsic_T: [0.34218, -0.02341, 0.12924] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu_time_offset: 0.0
+  filter_size_surf: 0.1
+  exposure_estimate_en: true
+  inv_expo_cov: 0.1
+  imu_en: true
+  imu_int_frame: 30
+  acc_cov: 2.5 # 0.5
+  gyr_cov: 1.8 # 0.3
+  b_acc_cov: 0.001 # 0.0001
+  b_gyr_cov: 0.001 # 0.0001
+  imu_rate_odom: false
+  gravity_align_en: true
+  dense_map_en: true
+  lidar_time_offset: -0.1
+  gravity_est_en: true
+  ba_bg_est_en: true
+  hilti_en: false
+  max_speed: 2.0 # m/s
+  max_pcd_frame: 3200 # max pcd frame
+  # pre
+  feature_extract_enabled: false 
+  point_filter_num: 5
+  scan_line: 32
+  lidar_type: 8 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32
+  lidar_min_dist: 0.8
+  lidar_max_dist: 60.0
+  # voxel
+  pub_plane_en: false
+  max_layer: 2
+  voxel_size: 0.5
+  min_eigen_value: 0.0025 # 0.0025
+  sigma_num: 3.0
+  beam_err: 0.05 #0.05
+  dept_err: 0.02 #0.02
+  layer_init_num: [5, 5, 5, 5, 5]
+  max_points_num: 50
+  max_iterations: 5
+  map_sliding_en: false
+  half_map_size: 100
+  sliding_thresh: 8.0
+
+
+G1: ## NX mid360
+  lid_topic: "rt/utlidar/cloud_livox_mid360"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/utlidar/imu_livox_mid360"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  img_en: 0                                  #invalid
+  lidar_en: 1
+  ros_driver_bug_fix: false
+  extrinsic_T: [-0.011, -0.02329, 0.04412] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu_time_offset: 0.0
+  filter_size_surf: 0.1
+  exposure_estimate_en: true
+  inv_expo_cov: 0.1
+  imu_en: true
+  imu_int_frame: 30
+  acc_cov: 0.5 # 0.5
+  gyr_cov: 0.3 # 0.3
+  b_acc_cov: 0.0001 # 0.0001
+  b_gyr_cov: 0.0001 # 0.0001
+  imu_rate_odom: false
+  gravity_align_en: true
+  dense_map_en: true
+  lidar_time_offset: 0.0
+  gravity_est_en: true
+  ba_bg_est_en: true
+  hilti_en: false
+  max_speed: 3.0 # m/s
+  max_pcd_frame: 3200 # max pcd frame
+  # pre
+  feature_extract_enabled: false 
+  point_filter_num: 5
+  scan_line: 4
+  lidar_type: 1 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32
+  lidar_min_dist: 0.25
+  lidar_max_dist: 50.0
+  # voxel
+  pub_plane_en: false
+  max_layer: 2
+  voxel_size: 0.5
+  min_eigen_value: 0.0025 # 0.0025
+  sigma_num: 3.0
+  beam_err: 0.05 #0.05
+  dept_err: 0.02 #0.02
+  layer_init_num: [5, 5, 5, 5, 5]
+  max_points_num: 50
+  max_iterations: 5
+  map_sliding_en: false
+  half_map_size: 100
+  sliding_thresh: 8.0

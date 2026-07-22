@@ -1,0 +1,107 @@
+G1:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu  rt/utlidar/imu_livox_mid360
+  lidar_topic: "rt/rslidar_points"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 4 #8
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 20.0
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 10.0
+  imu_meas_gyro_cov_inv: 10.0
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.4 #0.3
+  map_resolution: 0.4
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  cube_len: 300.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0, 0.0908]
+  save_pcd: true
+  save_pcd_res: 0.15
+  dist_sq_threshold: 2.0
+  plane_threshold: 0.1
+  ground_ang: 75.0     # degree
+
+Go2:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu  rt/utlidar/imu_livox_mid360
+  lidar_topic: "rt/unitree/slam_lidar/points"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 35 #8
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 20.0
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 0.5
+  imu_meas_gyro_cov_inv: 0.5
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.4 #0.3
+  map_resolution: 0.4
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  cube_len: 300.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0.0, 0.0908]
+  save_pcd: true
+  save_pcd_res: 0.15
+  dist_sq_threshold: 2.0
+  plane_threshold: 0.1
+  ground_ang: 75.0     # degree
+
+Go2_W:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu  rt/utlidar/imu_livox_mid360
+  lidar_topic: "rt/unitree/slam_lidar/points"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 35 #8
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 20.0
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_mapping/points"
+  pub_odom_topic: "rt/unitree/slam_mapping/odom"
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 0.5
+  imu_meas_gyro_cov_inv: 0.5
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.4 #0.3
+  map_resolution: 0.4
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  cube_len: 300.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0.0, 0.0908]
+  save_pcd: true
+  save_pcd_res: 0.15
+  dist_sq_threshold: 2.0
+  plane_threshold: 0.1
+  ground_ang: 75.0     # degree

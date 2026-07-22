@@ -1,0 +1,14 @@
+{
+  "DomainId": 0,
+  "Config": "/home/unitree/graph_pid_ws/src/slam_server_interfaces/config/cyclonedds.xml",
+  "Participant":
+  {
+    "Qos":
+    {
+      "Reliability":
+      {
+        "Kind": "RELIABLE_RELIABILITY_QOS"
+      }
+    }
+  }
+}

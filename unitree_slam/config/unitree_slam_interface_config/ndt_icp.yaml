@@ -1,0 +1,63 @@
+A2:
+  lid_topic: "rt/unitree/slam_lidar/points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/unitree/slam_lidar/imu1"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_global_map_topic: "rt/unitree/slam_relocation/global_map"
+  filter_size: 0.1
+  icp_score_thresh: 0.09 # 
+  lidar_min_dist: 1.5
+  lidar_max_dist: 35.0
+  scan_line: 128
+  lidar_type: 9
+  point_filter_num: 2
+  extrinsic_T: [0.0, 0.0, 0.0] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.33767, 0.0, 0.08134] #imu2baselink
+  imu2baselink_R: [0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+  
+B2:
+  lid_topic: "rt/rslidar_points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/dog_imu_raw"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_global_map_topic: "rt/unitree/slam_relocation/global_map"
+  filter_size: 0.1
+  icp_score_thresh: 0.03 # 
+  lidar_min_dist: 0.8
+  lidar_max_dist: 45.0
+  scan_line: 32
+  lidar_type: 8
+  point_filter_num: 5
+  extrinsic_T: [0.34218, -0.02341, 0.12924] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  
+B2_W:
+  lid_topic: "rt/rslidar_points"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/dog_imu_raw"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_global_map_topic: "rt/unitree/slam_relocation/global_map"
+  filter_size: 0.1
+  icp_score_thresh: 0.03 # 
+  lidar_min_dist: 0.8
+  lidar_max_dist: 45.0
+  scan_line: 32
+  lidar_type: 8
+  point_filter_num: 5
+  extrinsic_T: [0.34218, -0.02341, 0.12924] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+
+G1: #NX mid360
+  lid_topic: "rt/utlidar/cloud_livox_mid360"  #rt/unitree/slam_lidar/points rt/utlidar/cloud_livox_mid360
+  imu_topic: "rt/utlidar/imu_livox_mid360"  #rt/unitree/slam_lidar/imu rt/utlidar/imu_livox_mid360
+  pub_global_map_topic: "rt/unitree/slam_relocation/global_map"
+  filter_size: 0.1
+  icp_score_thresh: 0.07 # 
+  lidar_min_dist: 0.8
+  lidar_max_dist: 50.0
+  scan_line: 4
+  lidar_type: 1
+  point_filter_num: 7
+  extrinsic_T: [-0.011, -0.02329, 0.04412] #lidar2imu  mid360[-0.011, -0.02329, 0.04412]  5515[0.34218, -0.02341, 0.12924]
+  extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+  imu2baselink_T: [0.0, 0.0, 0.0] #imu2baselink
+  imu2baselink_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]

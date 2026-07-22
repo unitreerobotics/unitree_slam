@@ -1,0 +1,149 @@
+G1:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu 
+  lidar_topic: "rt/rslidar_points"
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_relocation/points"
+  pub_odom_topic: "rt/unitree/slam_relocation/odom"
+  pub_global_pcd_topic: "rt/unitree/slam_relocation/global_map"
+  pub_local_pcd_topic: "rt/unitree/slam_relocation/local_map"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 4 #
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 15.0          # 30.0
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 10.0
+  imu_meas_gyro_cov_inv: 10.0
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.3 #0.15
+  map_resolution: 0.3
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0.0, 0.0908] # [qw,qx,qy,qz,tx,ty,tz ]
+  icp_score: 0.03
+  cube_len: 300.0
+  speed_max: 2.5 #m/s
+  plane_threshold: 0.1 #0.1
+  dist_sq_threshold: 0.1 #0.1
+  init_local_map_res: 0.15
+  gridResolutionX: 15
+  gridResolutionY: 15
+  gridResolutionZ: 15
+  nearbyMethod: NEARBY26
+  re_position_tollerance: 3.0
+  re_angle_tollerance: 0.2
+  re_score_tollerance: 0.2
+  map_thresh: 10.0
+  time_thresh: 1.0
+  pos_thresh: 0.5
+  angle_thresh: 0.2
+  ground_ang: 75.0     # degree
+
+Go2:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu 
+  lidar_topic: "rt/unitree/slam_lidar/points"
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_relocation/points"
+  pub_odom_topic: "rt/unitree/slam_relocation/odom"
+  pub_global_pcd_topic: "rt/unitree/slam_relocation/global_map"
+  pub_local_pcd_topic: "rt/unitree/slam_relocation/local_map"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 45 #
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 15.0          # 30.0
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 0.5
+  imu_meas_gyro_cov_inv: 0.5
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.3 #0.15
+  map_resolution: 0.3
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0.0, 0.0908] # [qw,qx,qy,qz,tx,ty,tz ]
+  icp_score: 0.03
+  cube_len: 300.0
+  speed_max: 2.5 #m/s
+  plane_threshold: 0.1 #0.1
+  dist_sq_threshold: 0.1 #0.1
+  init_local_map_res: 0.15
+  gridResolutionX: 15
+  gridResolutionY: 15
+  gridResolutionZ: 15
+  nearbyMethod: NEARBY26
+  re_position_tollerance: 3.0
+  re_angle_tollerance: 0.2
+  re_score_tollerance: 0.2
+  map_thresh: 10.0
+  time_thresh: 1.0
+  pos_thresh: 0.5
+  angle_thresh: 0.2
+  ground_ang: 75.0     # degree
+
+Go2_W:
+  imu_topic: "rt/dog_imu_raw"   #/livox/imu 
+  lidar_topic: "rt/unitree/slam_lidar/points"
+  map_frame: "map"
+  body_frame: "rslidar"
+  pub_point_topic: "rt/unitree/slam_relocation/points"
+  pub_odom_topic: "rt/unitree/slam_relocation/odom"
+  pub_global_pcd_topic: "rt/unitree/slam_relocation/global_map"
+  pub_local_pcd_topic: "rt/unitree/slam_relocation/local_map"
+  imu_acc_multi: 1.0 #10.0
+  imu_gyro_multi: 1.0
+  filter_num: 45 #
+  lidar_scan_min_range: 0.25
+  lidar_scan_max_range: 15.0          # 30.0
+  imu_init_num: 100
+  vel_cov: 20.0
+  acc_cov: 500.0
+  gyro_cov: 1000.0
+  b_acc_cov: 0.0001
+  b_gyro_cov: 0.0001
+  lidar_meas_cov_inv: 100.0
+  imu_meas_acc_cov_inv: 0.5
+  imu_meas_gyro_cov_inv: 0.5
+  satu_acc: 20.0
+  satu_gyro: 35.0
+  scan_resolution: 0.3 #0.15
+  map_resolution: 0.3
+  near_search_num: 5.0
+  move_thresh: 1.5
+  det_range: 60.0
+  pose_imu_lidar: [0.707, 0.0, 0.0, 0.707, 0.1710, 0.0, 0.0908] # [qw,qx,qy,qz,tx,ty,tz ]
+  icp_score: 0.03
+  cube_len: 300.0
+  speed_max: 2.5 #m/s
+  plane_threshold: 0.1 #0.1
+  dist_sq_threshold: 0.1 #0.1
+  init_local_map_res: 0.15
+  gridResolutionX: 15
+  gridResolutionY: 15
+  gridResolutionZ: 15
+  nearbyMethod: NEARBY26
+  re_position_tollerance: 3.0
+  re_angle_tollerance: 0.2
+  re_score_tollerance: 0.2
+  map_thresh: 10.0
+  time_thresh: 1.0
+  pos_thresh: 0.5
+  angle_thresh: 0.2
+  ground_ang: 75.0     # degree

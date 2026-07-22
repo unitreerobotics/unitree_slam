@@ -1,0 +1,65 @@
+dwa_controller:
+  ros__parameters:
+    # 运动约束（按标准DWA优化）
+    max_vel_x: 1.5
+    min_vel_x: 0.0
+    max_vel_y: 0.0
+    max_vel_theta: 1.0 #太小转弯困难，太大轨迹震荡
+    max_acc_x: 2.5
+    max_acc_theta: 3.2 
+    
+    # 仿真参数（标准DWA值）
+    sim_time: 1.7               # 增加预测时间 轨迹前向模拟时长(s) 常见 1.5~3.0
+    sim_granularity: 0.025      # 提高精度 轨迹采样步长 (s)
+    angular_sim_granularity: 0.1
+    
+    # 代价函数权重（标准DWA优化）
+    path_distance_bias: 0.6     #路径距离权重，越大越贴全局路
+    goal_distance_bias: 0.8     #终点距离权重，越大更直接朝目标
+    occdist_scale: 0.01         # 标准DWA障碍物权重 障碍物代价权重，越大越保守
+    twirling_scale: 0.0         #高旋转惩罚
+    
+    # ESDF融合权重
+    local_esdf_weight: 0.5      # 平衡权重 局部 / 全局 ESDF 融合权重
+    global_esdf_weight: 0.5     # 平衡权重 
+    
+    # 新增：对齐和前向目标权重
+    alignment_scale: 0.6        # 路径对齐权重
+    goal_front_scale: 0.8       # 前向目标权重
+    
+    # 采样参数（标准DWA值）
+    vx_samples: 3               # 减少采样提高效率
+    vy_samples: 10              # 差分驱动增加侧向采样
+    vtheta_samples: 20
+    
+    # 安全参数
+    stop_time_buffer: 0.2       # 停止时间缓冲
+    forward_point_distance: 0.325  # 前向评分点距离
+    oscillation_reset_dist: 0.05   #振荡检测阈值，超过则判振荡
+    oscillation_reset_angle: 0.2
+    
+    # 机器人参数
+    robot_radius: 0.1           # 减小半径提高通过性
+    lookahead_distance: 1.0
+    goal_tolerance: 0.5
+    
+    # 目标点障碍物检查参数
+    goal_obstacle_check_distance: 1.0    # 开始检查目标点障碍物的距离 (m)
+    goal_obstacle_esdf_threshold: 5.0    # 目标点障碍物ESDF阈值 (cm)
+    
+    use_dwa: true
+    
+    # 足迹缩放参数
+    scaling_speed: 0.25         # 开始缩放的速度阈值
+    max_scaling_factor: 0.2     # 最大缩放因子
+    
+    # 高速转向惩罚参数
+    high_speed_threshold: 0.7   # 高速阈值 (m/s)
+    high_turn_threshold: 0.5    # 高角速度阈值 (rad/s)
+    high_speed_turn_penalty: 2.0 # 高速转向惩罚系数
+    
+    # ESDF速度限制参数
+    esdf_low_threshold: 40.0    # ESDF低阈值（黄色状态）
+    esdf_high_threshold: 70.0   # ESDF高阈值（蓝色/绿色分界）
+    x_low_speed: 0.3           # 低ESDF区域速度限制 (m/s)
+    x_mid_speed: 0.6           # 中ESDF区域速度限制 (m/s) 

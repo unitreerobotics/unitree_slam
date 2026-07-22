@@ -1,0 +1,16 @@
+image: map.png
+origin:
+- -7.324879169464111
+- -13.30663013458252
+- 0
+resolution: 10
+
+value_semantics:
+  occupied_values: [0]
+  free_values: [255]
+  unknown_values: [100]
+  cost_range: [101, 102]
+
+esdf:
+  max_distance: 2.0
+  cost_penalty_max_m: 0.5

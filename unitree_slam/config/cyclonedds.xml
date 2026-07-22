@@ -1,0 +1,12 @@
+<CycloneDDS>
+    <Domain>
+        <General>
+            <Interfaces>
+                <NetworkInterface name="wlp0s20f3" priority="default" multicast="default"/>
+            </Interfaces>
+<!--            <Internal>-->
+<!--                <MinimumSocketReceiveBufferSize>20MB</MinimumSocketReceiveBufferSize>-->
+<!--            </Internal>-->
+        </General>
+    </Domain>
+</CycloneDDS>

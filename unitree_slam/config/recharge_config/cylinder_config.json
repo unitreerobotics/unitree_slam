@@ -1,0 +1,11 @@
+{
+    "lidar_topic": "rt/rslidar_points",
+    "high_intensity_topic": "rt/high_intensity",
+    "chargingWidth": 0.4,
+    "chargingLength": 0.4,
+    "intensity_threshold": 150.0,
+    "dis_chargePt2Center": 0.38,
+    "max_x_speed": 0.5,
+    "max_y_speed": 0.8,
+    "max_yaw_speed": 0.8
+}

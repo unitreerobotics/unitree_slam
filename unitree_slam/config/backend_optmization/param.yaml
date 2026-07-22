@@ -1,0 +1,74 @@
+R1:
+  historyKeyFramesLocalMapTopic: "rt/unitree/slam_mapping/key_frames_local_map"
+  icpKeyFrameTopic: "rt/unitree/slam_mapping/icp_key_frame"
+  updatePathTopic: "rt/unitree/slam_mapping/update_path"
+  loopClosurePathTopic: "rt/unitree/slam_mapping/loop_closure_path"
+  odometrySurfLeafSize: 0.2             # default: 0.4 - outdoor, 0.2 - indoor
+  mappingSurfLeafSize: 0.05                      # default: 0.4 - outdoor, 0.2 - indoor
+  numberOfCores: 4                              # number of cores for mapping optimization
+  loopClosureTimes: 1.0                         # seconds
+  historyKeyframeSearchRadius: 5.0            # meters, key frame that is within n meters from current pose will be considerd for loop closure
+  historyKeyframeSearchTimeDiff: 30.0           # seconds, key frame that is n seconds older will be considered for loop closure
+  historyKeyframeSearchNum: 20                  # number of hostory key frames will be fused into a submap for loop closure
+  historyKeyframeFitnessScore: 0.02             #0.15 icp threshold, the smaller the better alignment
+  surroundingkeyframeAddingDistThreshold: 1.0   #meters, regulate keyframe adding threshold
+  surroundingkeyframeAddingAngleThreshold: 0.4  # radians, regulate keyframe adding threshold
+  # enablePubPoints: true
+  enablePubVisualizeLoop: false
+
+A2:
+  historyKeyFramesLocalMapTopic: "rt/unitree/slam_mapping/key_frames_local_map"
+  icpKeyFrameTopic: "rt/unitree/slam_mapping/icp_key_frame"
+  updatePathTopic: "rt/unitree/slam_mapping/update_path"
+  loopClosurePathTopic: "rt/unitree/slam_mapping/loop_closure_path"
+  odometrySurfLeafSize: 0.2             # default: 0.4 - outdoor, 0.2 - indoor
+  mappingSurfLeafSize: 0.05                      # default: 0.4 - outdoor, 0.2 - indoor
+  numberOfCores: 4                              # number of cores for mapping optimization
+  loopClosureTimes: 1.0                         # seconds
+  historyKeyframeSearchRadius: 5.0            # meters, key frame that is within n meters from current pose will be considerd for loop closure
+  historyKeyframeSearchTimeDiff: 30.0           # seconds, key frame that is n seconds older will be considered for loop closure
+  historyKeyframeSearchNum: 20                  # number of hostory key frames will be fused into a submap for loop closure
+  historyKeyframeFitnessScore: 0.02             #0.15 icp threshold, the smaller the better alignment
+  surroundingkeyframeAddingDistThreshold: 1.0   #meters, regulate keyframe adding threshold
+  surroundingkeyframeAddingAngleThreshold: 0.4  # radians, regulate keyframe adding threshold
+  # enablePubPoints: true
+  enablePubVisualizeLoop: false
+
+A2_W:
+  historyKeyFramesLocalMapTopic: "rt/unitree/slam_mapping/key_frames_local_map"
+  icpKeyFrameTopic: "rt/unitree/slam_mapping/icp_key_frame"
+  updatePathTopic: "rt/unitree/slam_mapping/update_path"
+  loopClosurePathTopic: "rt/unitree/slam_mapping/loop_closure_path"
+  odometrySurfLeafSize: 0.2             # default: 0.4 - outdoor, 0.2 - indoor
+  mappingSurfLeafSize: 0.05                      # default: 0.4 - outdoor, 0.2 - indoor
+  numberOfCores: 4                              # number of cores for mapping optimization
+  loopClosureTimes: 1.0                         # seconds
+  historyKeyframeSearchRadius: 5.0            # meters, key frame that is within n meters from current pose will be considerd for loop closure
+  historyKeyframeSearchTimeDiff: 30.0           # seconds, key frame that is n seconds older will be considered for loop closure
+  historyKeyframeSearchNum: 20                  # number of hostory key frames will be fused into a submap for loop closure
+  historyKeyframeFitnessScore: 0.02             #0.15 icp threshold, the smaller the better alignment
+  surroundingkeyframeAddingDistThreshold: 1.0   #meters, regulate keyframe adding threshold
+  surroundingkeyframeAddingAngleThreshold: 0.4  # radians, regulate keyframe adding threshold
+  # enablePubPoints: true
+  enablePubVisualizeLoop: false
+
+G1:
+  historyKeyFramesLocalMapTopic: "rt/unitree/slam_mapping/key_frames_local_map"
+  icpKeyFrameTopic: "rt/unitree/slam_mapping/icp_key_frame"
+  updatePathTopic: "rt/unitree/slam_mapping/update_path"
+  loopClosurePathTopic: "rt/unitree/slam_mapping/loop_closure_path"
+  odometrySurfLeafSize: 0.2             # default: 0.4 - outdoor, 0.2 - indoor
+  mappingSurfLeafSize: 0.05                      # default: 0.4 - outdoor, 0.2 - indoor
+  numberOfCores: 4                              # number of cores for mapping optimization
+  loopClosureTimes: 1.0                         # seconds
+  historyKeyframeSearchRadius: 5.0            # meters, key frame that is within n meters from current pose will be considerd for loop closure
+  historyKeyframeSearchTimeDiff: 30.0           # seconds, key frame that is n seconds older will be considered for loop closure
+  historyKeyframeSearchNum: 20                  # number of hostory key frames will be fused into a submap for loop closure
+  historyKeyframeFitnessScore: 0.1             #0.15 icp threshold, the smaller the better alignment
+  surroundingkeyframeAddingDistThreshold: 1.5   # meters, regulate keyframe adding threshold
+  surroundingkeyframeAddingAngleThreshold: 0.2  # radians, regulate keyframe adding threshold
+  # enablePubPoints: true
+  enablePubVisualizeLoop: false
+
+
+

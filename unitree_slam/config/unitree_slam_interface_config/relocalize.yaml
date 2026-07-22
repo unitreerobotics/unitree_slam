@@ -1,0 +1,263 @@
+G1:
+  ################[Necessary]###############
+  ## Global map
+  global_map_path: /home/unitree/dist/files/pcds/test_map/
+  
+  imu_acc: [0.0, 0.0, 9.81] # [m/s^2]  //可选
+  
+  ## Cut height for point clouds [m]
+  cut_height_h: 25.0
+  cut_height_l: -0.5
+  
+  ## NDT/ICP parameters
+  icp_leaf_size: 0.1
+  icp_max_refinement_iterations: 0
+  icp_radius_threshold: 50.0
+  icp_score_threshold: 0.1
+  icp_MaxCorrespondenceDistance: 1.0
+  icp_TransformationEpsilon: 1e-6
+  icp_EuclideanFitnessEpsilon: 1e-6
+  
+  ## NoPriorLocalizer parameters
+  min_level_res: 0.5 # [m], e.g. outdoor: 1.0, indoor: 0.5
+  max_level: 6
+  
+  ## Angular search range [rad]
+  # 6.28 input is converted to 2*M_PI
+  min_rpy: [-0.02, -0.02, 0.0] # [roll, pitch, yaw]
+  max_rpy: [0.02, 0.02, 6.28] # [roll, pitch, yaw]
+  
+  ## Score threshold
+  # score_threshold = floor(src_points.size() * score_threshold_percentage)
+  score_threshold_percentage: 0.9
+  
+  ################[Optional]################
+  ## Downsample target clouds [m]
+  tar_leaf_size: 0.5 # off: 0.0  //1000平以下0.5～1.0
+  
+  ## Downsample source clouds [m]
+  src_leaf_size: 1.0 # off: 0.0 //1000平以下0.5～1.0
+  
+  ## Crop source clouds [m]
+  min_scan_range: 0.0 # [m]
+  max_scan_range: 100.0 # [m]
+  # off: set 0.0 to both min_scan_range and max_scan_range
+  
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  timeout_msec: 10000  # 最大定位时间（毫秒），超时则返回失败
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  trans_search_margin_idx: 10
+  angular_search_margin_rad: 6.28
+  
+  trans_search_margin_x: 20.0
+  trans_search_margin_y: 20.0
+  trans_search_margin_z: 1.0
+
+  boundary_x: 50
+  boundary_y: 50
+  boundary_z: 20
+
+  lidar_frame_max: 5
+  imu_frame_max: 100
+
+  use_prior: true
+
+  max_iters: 50
+
+A2:
+  ################[Necessary]###############
+  ## Global map
+  global_map_path: /home/unitree/dist/files/pcds/test_map/
+  
+  imu_acc: [0.0, 0.0, 9.81] # [m/s^2]  //可选
+  
+  ## Cut height for point clouds [m]
+  cut_height_h: 25.0
+  cut_height_l: -0.5
+  
+  ## NDT/ICP parameters
+  icp_leaf_size: 0.1
+  icp_max_refinement_iterations: 0
+  icp_radius_threshold: 50.0
+  icp_score_threshold: 0.1
+  icp_MaxCorrespondenceDistance: 1.0
+  icp_TransformationEpsilon: 1e-6
+  icp_EuclideanFitnessEpsilon: 1e-6
+  
+  ## NoPriorLocalizer parameters
+  min_level_res: 0.5 # [m], e.g. outdoor: 1.0, indoor: 0.5
+  max_level: 6
+  
+  ## Angular search range [rad]
+  # 6.28 input is converted to 2*M_PI
+  min_rpy: [-0.02, -0.02, 0.0] # [roll, pitch, yaw]
+  max_rpy: [0.02, 0.02, 6.28] # [roll, pitch, yaw]
+  
+  ## Score threshold
+  # score_threshold = floor(src_points.size() * score_threshold_percentage)
+  score_threshold_percentage: 0.9
+  
+  ################[Optional]################
+  ## Downsample target clouds [m]
+  tar_leaf_size: 0.5 # off: 0.0  //1000平以下0.5～1.0
+  
+  ## Downsample source clouds [m]
+  src_leaf_size: 1.0 # off: 0.0 //1000平以下0.5～1.0
+  
+  ## Crop source clouds [m]
+  min_scan_range: 0.0 # [m]
+  max_scan_range: 100.0 # [m]
+  # off: set 0.0 to both min_scan_range and max_scan_range
+  
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  timeout_msec: 10000  # 最大定位时间（毫秒），超时则返回失败
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  trans_search_margin_idx: 10
+  angular_search_margin_rad: 6.28
+  
+  trans_search_margin_x: 20.0
+  trans_search_margin_y: 20.0
+  trans_search_margin_z: 1.0
+
+  boundary_x: 50
+  boundary_y: 50
+  boundary_z: 20
+
+  lidar_frame_max: 5
+  imu_frame_max: 100
+
+  use_prior: true
+
+  max_iters: 50
+
+B2:
+  ################[Necessary]###############
+  ## Global map
+  global_map_path: /home/unitree/dist/files/pcds/test_map/
+  
+  imu_acc: [0.0, 0.0, 9.81] # [m/s^2]  //可选
+  
+  ## Cut height for point clouds [m]
+  cut_height_h: 25.0
+  cut_height_l: -0.5
+  
+  ## NDT/ICP parameters
+  icp_leaf_size: 0.1
+  icp_max_refinement_iterations: 0
+  icp_radius_threshold: 50.0
+  icp_score_threshold: 0.1
+  icp_MaxCorrespondenceDistance: 1.0
+  icp_TransformationEpsilon: 1e-6
+  icp_EuclideanFitnessEpsilon: 1e-6
+  
+  ## NoPriorLocalizer parameters
+  min_level_res: 0.5 # [m], e.g. outdoor: 1.0, indoor: 0.5
+  max_level: 6
+  
+  ## Angular search range [rad]
+  # 6.28 input is converted to 2*M_PI
+  min_rpy: [-0.02, -0.02, 0.0] # [roll, pitch, yaw]
+  max_rpy: [0.02, 0.02, 6.28] # [roll, pitch, yaw]
+  
+  ## Score threshold
+  # score_threshold = floor(src_points.size() * score_threshold_percentage)
+  score_threshold_percentage: 0.9
+  
+  ################[Optional]################
+  ## Downsample target clouds [m]
+  tar_leaf_size: 0.5 # off: 0.0  //1000平以下0.5～1.0
+  
+  ## Downsample source clouds [m]
+  src_leaf_size: 1.0 # off: 0.0 //1000平以下0.5～1.0
+  
+  ## Crop source clouds [m]
+  min_scan_range: 0.0 # [m]
+  max_scan_range: 100.0 # [m]
+  # off: set 0.0 to both min_scan_range and max_scan_range
+  
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  timeout_msec: 10000  # 最大定位时间（毫秒），超时则返回失败
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  trans_search_margin_idx: 10
+  angular_search_margin_rad: 6.28
+  
+  trans_search_margin_x: 20.0
+  trans_search_margin_y: 20.0
+  trans_search_margin_z: 1.0
+
+  boundary_x: 50
+  boundary_y: 50
+  boundary_z: 20
+
+  lidar_frame_max: 5
+  imu_frame_max: 100
+
+  use_prior: true
+
+  max_iters: 50
+
+B2_W:
+  ################[Necessary]###############
+  ## Global map
+  global_map_path: /home/unitree/dist/files/pcds/test_map/
+  
+  imu_acc: [0.0, 0.0, 9.81] # [m/s^2]  //可选
+  
+  ## Cut height for point clouds [m]
+  cut_height_h: 25.0
+  cut_height_l: -0.5
+  
+  ## NDT/ICP parameters
+  icp_leaf_size: 0.1
+  icp_max_refinement_iterations: 0
+  icp_radius_threshold: 50.0
+  icp_score_threshold: 0.1
+  icp_MaxCorrespondenceDistance: 1.0
+  icp_TransformationEpsilon: 1e-6
+  icp_EuclideanFitnessEpsilon: 1e-6
+  
+  ## NoPriorLocalizer parameters
+  min_level_res: 0.5 # [m], e.g. outdoor: 1.0, indoor: 0.5
+  max_level: 6
+  
+  ## Angular search range [rad]
+  # 6.28 input is converted to 2*M_PI
+  min_rpy: [-0.02, -0.02, 0.0] # [roll, pitch, yaw]
+  max_rpy: [0.02, 0.02, 6.28] # [roll, pitch, yaw]
+  
+  ## Score threshold
+  # score_threshold = floor(src_points.size() * score_threshold_percentage)
+  score_threshold_percentage: 0.9
+  
+  ################[Optional]################
+  ## Downsample target clouds [m]
+  tar_leaf_size: 0.5 # off: 0.0  //1000平以下0.5～1.0
+  
+  ## Downsample source clouds [m]
+  src_leaf_size: 1.0 # off: 0.0 //1000平以下0.5～1.0
+  
+  ## Crop source clouds [m]
+  min_scan_range: 0.0 # [m]
+  max_scan_range: 100.0 # [m]
+  # off: set 0.0 to both min_scan_range and max_scan_range
+  
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  timeout_msec: 10000  # 最大定位时间（毫秒），超时则返回失败
+  ## Search margin  （可选）给定一个初始位姿附近的搜索范围
+  trans_search_margin_idx: 10
+  angular_search_margin_rad: 6.28
+  
+  trans_search_margin_x: 20.0
+  trans_search_margin_y: 20.0
+  trans_search_margin_z: 1.0
+
+  boundary_x: 50
+  boundary_y: 50
+  boundary_z: 20
+
+  lidar_frame_max: 5
+  imu_frame_max: 100
+
+  use_prior: true
+
+  max_iters: 50

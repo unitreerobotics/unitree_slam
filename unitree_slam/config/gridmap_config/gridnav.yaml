@@ -1,0 +1,630 @@
+# gridnav.yaml:
+# - 顶层沿用 config.yaml 的机型命名
+# - astar_planner: A* 全局规划、动态重规划、轨迹优化参数
+# - gridnav_map: 局部栅格地图、点云过滤、前向侵入检测参数
+# - point_cloud_topic / odom_topic / T_Dog2lidar 仍然在 config.yaml 中维护
+# - ESDF/value semantics 仍然在 map.yaml 中维护
+
+R1:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: lidar  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.7  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.1  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.7  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 45.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.15  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.35  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: -0.7  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.1  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.12  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.2  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.2  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+A2:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: map  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: 0.0  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.0 # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 0.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.0  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.0  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: 0.0  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.0  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.12  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.85  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.53  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+A2_W:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: map  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: 0.0  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.0  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 0.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.0  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.0  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: 0.0  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.0  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.12  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.85  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.53  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+B2:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: lidar  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.3  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.0  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 0.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.0  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.0  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: 0.0  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.0  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.08  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.5  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.48  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+B2_W:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: lidar  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.3  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.0  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 0.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.0  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.0  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: 0.0  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.0  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.08  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.5  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.48  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+G1:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 30.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 30.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: map  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.7  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.1  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.7  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 45.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.15  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.35  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: -0.7  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.1  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.12  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.2  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.2  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+Go2_W:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: lidar  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.2  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.7  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 45.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.15  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.35  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: -0.7  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.1  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.08  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.5  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.48  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m
+
+Go2:
+  astar_planner:
+    robot_radius: 0.0  # 机器人额外安全半径，参与障碍净空计算，单位 m
+    step_size: 1  # A* 网格扩展步长，单位 cell
+    obstacle_threshold: 50  # 兼容占据栅格阈值，超过该值视为障碍
+    max_iterations: 1000000000  # A* 最大搜索迭代次数
+    use_diagonal: true  # 是否允许 8 邻域对角扩展
+    lookahead_distance: 30.0  # 动态规划前瞻距离，单位 m
+    global_cost_weight: 0.7  # 全局代价图权重
+    local_cost_weight: 0.7  # 局部代价图权重
+    obstacle_check_distance: 5.0  # 前方障碍检查距离，单位 m
+    esdf_obstacle_threshold: 32.0  # 全局 ESDF 硬障碍阈值
+    esdf_obstacle_threshold_for_local: 32.0  # 局部 ESDF 硬障碍阈值
+    esdf_max_distance_for_cost: 1.0  # ESDF 代价归一化最大距离，单位 m
+    preferred_clearance_m: 1.2  # 软代价偏好的离障距离，单位 m
+    obstacle_cost_gain: 50.0  # 靠近障碍时的软代价放大系数
+    replan_distance_threshold: 5.0  # 距前瞻点小于该值时允许触发重规划，单位 m
+    candidate_confirm_frames: 2  # 候选重规划轨迹连续稳定帧数
+    max_replan_lateral_jump_m: 0.4  # 候选轨迹跨帧允许的最大横向跳变，单位 m
+    immediate_replace_lateral_diff_m: 0.15  # 新旧轨迹足够接近时可直接切换的横向差，单位 m
+    current_trajectory_passable_prefix_distance_m: 10.0  # 检查当前轨迹前缀可通行性的距离，单位 m
+    trajectory_similarity_prefix_distance_m: 1.0  # 新旧轨迹前缀相似性比较距离，单位 m
+    prefix_compare_step_m: 0.2  # 前缀比较采样步长，单位 m
+    max_prefix_lateral_deviation_m: 0.3  # 可接受的新旧轨迹前缀最大横向偏差，单位 m
+    prefix_blocked_required_samples: 5  # 判定当前轨迹前缀阻塞所需连续样本数
+    forced_replan_interval_sec: 10.0  # 定时强制重规划周期，单位 s
+    distance_replan_threshold: 10.0  # 累计行走到该距离后触发重规划，单位 m
+    surrogate_goal_esdf_threshold: 30.0  # 真终点/代理终点局部 ESDF 可达阈值
+    surrogate_goal_clear_radius_m: 0.4  # 终点局部净空检查半径，单位 m
+    surrogate_goal_wait_timeout_sec: 60.0  # 代理终点到达后等待真终点清障超时，单位 s
+    surrogate_goal_search_backstep_m: 0.1  # 从真终点向机器人方向回退搜索步长，单位 m
+    surrogate_goal_search_max_backoff_m: 2.0  # 代理终点最大回退距离，单位 m
+    surrogate_goal_lateral_search_half_width_m: 0.4  # 代理终点横向搜索半宽，单位 m
+    surrogate_goal_lateral_step_m: 0.1  # 代理终点横向搜索步长，单位 m
+    traj_order: 6  # Bezier 轨迹阶数
+    vx_max: 1.0  # x 方向最大速度，单位 m/s
+    vx_min: -1.0  # x 方向最小速度，单位 m/s
+    vy_max: 1.0  # y 方向最大速度，单位 m/s
+    vy_min: -1.0  # y 方向最小速度，单位 m/s
+    ax_max: 1.0  # x 方向最大加速度，单位 m/s^2
+    ax_min: -1.0  # x 方向最小加速度，单位 m/s^2
+    ay_max: 1.0  # y 方向最大加速度，单位 m/s^2
+    ay_min: -1.0  # y 方向最小加速度，单位 m/s^2
+    obstacle_shadow_enabled: true  # 是否启用动态障碍影子，仅影响本次动态重规划
+    obstacle_shadow_extension_m: 0.4  # 沿原路径前进方向向障碍物后方延长距离，单位 m
+    obstacle_shadow_lateral_margin_m: 0.1  # 障碍物横向虚拟膨胀距离，单位 m
+    obstacle_shadow_toward_robot_margin_m: 0.2  # 朝机器人来向侧虚拟膨胀距离，单位 m
+    obstacle_shadow_pass_clearance_m: 0.6  # 机器人越过影子后继续保持重规划的前向余量，单位 m
+    obstacle_shadow_cluster_search_radius_m: 1.2  # 低 ESDF 障碍连通簇搜索半径，单位 m
+    obstacle_shadow_seed_search_radius_m: 0.35  # 阻挡路径点附近寻找障碍种子的半径，单位 m
+    obstacle_shadow_anchor_reset_distance_m: 1.0  # 新阻挡点离锁定锚点超过该距离后重新锁定方向，单位 m
+    obstacle_shadow_source_esdf: 45  # 小于等于该 ESDF 值的局部格子参与障碍簇
+    obstacle_shadow_max_cluster_cells: 1200  # 障碍簇最大格子数，防止异常大连通域拖慢规划
+    obstacle_shadow_clear_frames: 3  # 连续未检测到路径阻挡多少帧后清除影子锁定
+  gridnav_map:
+    cloud_input_frame: lidar  # 点云输入坐标系: lidar | map
+    local_resolution: 0.1  # 局部地图分辨率，单位 m/cell
+    local_size: 100  # 局部地图边长，单位 cell
+    point_range_m: 5.0  # 点云参与建图和检测的最大半径，单位 m
+    z_min: -0.2  # 点云保留最小高度，单位 m（机器人坐标系）
+    z_max: 0.4  # 点云保留最大高度，单位 m（机器人坐标系）
+    occlusion_arc_radius_m: 0.7  # 遮挡补偿圆弧障碍半径，单位 m
+    front_intrusion_angle_deg: 45.0  # 前向侵入检测扇区半角，单位 deg
+    front_intrusion_r_min_m: 0.15  # 前向侵入检测最近半径，单位 m
+    front_intrusion_r_max_m: 0.35  # 前向侵入检测最远半径，单位 m
+    front_intrusion_z_min_m: -0.7  # 前向侵入检测最小高度，单位 m
+    front_intrusion_z_max_m: 0.1  # 前向侵入检测最大高度，单位 m
+    front_intrusion_point_threshold: 10  # 判定前向侵入成立所需点数阈值
+    front_intrusion_enter_frames: 2  # 进入阻塞态所需连续命中帧数
+    front_intrusion_exit_frames: 3  # 解除阻塞态所需连续清空帧数
+    enable_timestamp_sync: true  # 是否启用里程计与点云时间同步
+    pointcloud_queue_duration: 0.8  # 点云缓存时长，单位 s
+    max_timestamp_diff: 0.08  # 里程计与点云允许最大时间差，单位 s
+    body_x_min: -0.5  # 车体过滤包围盒最小 x，单位 m
+    body_x_max: 0.48  # 车体过滤包围盒最大 x，单位 m
+    body_y_min: -0.35  # 车体过滤包围盒最小 y，单位 m
+    body_y_max: 0.35  # 车体过滤包围盒最大 y，单位 m

@@ -1,0 +1,35 @@
+# Fusion Parameters
+
+# =============================================================================
+# 噪声参数 (Noise Parameters)
+# =============================== 更相信odom参数 ==============================================
+# odom_position_sigma: 0.05    # 里程计位置噪声标准差 (m)
+# odom_rotation_sigma: 0.05    # 里程计旋转噪声标准差 (rad) - 增加此值，让系统在 RTK Heading 有效时更倾向于使用 RTK
+# gps_base_sigma: 0.1           # GPS基础噪声标准差 (m)，实际噪声 = gps_base_sigma * HDOP
+# gps_yaw_sigma: 0.8          # heading 的基础噪声标准差 - 减小此值，增强 RTK Heading 的约束力
+# gps_yaw_max_valid_sigma: 1.0 # heading 允许参与融合的最大标准差，超出直接丢弃
+# =============================================================================
+odom_position_sigma: 0.08    # 里程计位置噪声标准差 (m)
+odom_rotation_sigma: 0.06    # 里程计旋转噪声标准差 (rad) - 增加此值，让系统在 RTK Heading 有效时更倾向于使用 RTK
+gps_base_sigma: 0.20           # GPS基础噪声标准差 (m)，实际噪声 = gps_base_sigma * HDOP
+gps_yaw_sigma: 0.16          # heading 的基础噪声标准差 - 减小此值，增强 RTK Heading 的约束力
+gps_yaw_max_valid_sigma: 0.5 # heading 允许参与融合的最大标准差，超出直接丢弃
+
+# =============================================================================
+# 融合参数 (Fusion Parameters)
+# =============================================================================
+use_dual_antenna: false                  # 是否使用双天线
+lever_arm: [-0.3, 0.0, 0.05]  # 主天线在body系下位置 [x, y, z] (m)
+max_gps_match_dt: 0.5                   # GPS与odom时间戳最大差值 (s)
+max_nodes: 2000                         # 最大节点数 (边缘化阈值)
+gps_time_delay: 0.15
+
+# =============================================================================
+# 初始化参数 (Initialization Parameters)
+# =============================================================================
+init_gps_buffer_size: 30        # 初始化GPS缓冲区大小
+init_min_gps_displacement: 1.0  # 初始化所需最小GPS位移 (m)
+init_min_odom_displacement: 1.0 # 初始化所需最小odom位移 (m)
+init_yaw_prior_sigma: 0.2       # 初始yaw先验噪声 (rad)
+
+print_interval_thre: 10

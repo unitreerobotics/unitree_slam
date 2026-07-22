@@ -1,0 +1,62 @@
+robot_Type: G1
+
+G1:
+  lid_topic: "rt/utlidar/cloud_livox_mid360"
+  imu_topic: "rt/utlidar/imu_livox_mid360"
+  odom_topic: "rt/dog_odom"
+  lidarMinRange: 0.25
+  lidarMaxRange: 50
+  lidar_type: 1 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32
+  N_SCANS: 4
+  loopClosure: true
+  useRtkForMapping: false
+  useRtkForRelio: false
+  initialScoreTollerance: 0.1
+  map_filter_size: 0.1
+  extrinsic_T: [-0.011, -0.02329, 0.04412, 0.0, 0.0, 0.0]   # x, y, z, roll, pitch, yaw
+  imu2baselink_T: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+A2:
+  lid_topic: "rt/unitree/slam_lidar/points"
+  imu_topic: "rt/unitree/slam_lidar/imu1"
+  odom_topic: "rt/dog_odom"
+  lidarMinRange: 1.5
+  lidarMaxRange: 35
+  lidar_type: 9 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32, 9=jt128
+  N_SCANS: 128
+  loopClosure: true
+  useRtkForMapping: false
+  useRtkForRelio: false
+  initialScoreTollerance: 0.09
+  map_filter_size: 0.1
+  extrinsic_T: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]   # x, y, z, roll, pitch, yaw
+  imu2baselink_T: [0.33767, 0.0, 0.08134, 0.0, 0.0, 0.0]
+B2:
+  lid_topic: "rt/rslidar_points"
+  imu_topic: "rt/dog_imu_raw"
+  odom_topic: "rt/dog_odom"
+  lidarMinRange: 0.8
+  lidarMaxRange: 45
+  lidar_type: 8 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32, 9=jt128
+  N_SCANS: 32
+  loopClosure: true
+  useRtkForMapping: false
+  useRtkForRelio: false
+  initialScoreTollerance: 0.09
+  map_filter_size: 0.1
+  extrinsic_T: [0.34218, -0.02341, 0.12924, 0.0, 0.0, 0.0]   # x, y, z, roll, pitch, yaw
+  imu2baselink_T: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+B2_W:
+  lid_topic: "rt/rslidar_points"
+  imu_topic: "rt/dog_imu_raw"
+  odom_topic: "rt/dog_odom"
+  lidarMinRange: 0.8
+  lidarMaxRange: 45
+  lidar_type: 8 # 1=Mid360，2=VELO16，3=OUST64，4=L515，5=XT32，6=PANDAR128，7=ROBOSENSE, 8=helios32, 9=jt128
+  N_SCANS: 32
+  loopClosure: true
+  useRtkForMapping: false
+  useRtkForRelio: false
+  initialScoreTollerance: 0.09
+  map_filter_size: 0.1
+  extrinsic_T: [0.34218, -0.02341, 0.12924, 0.0, 0.0, 0.0]   # x, y, z, roll, pitch, yaw
+  imu2baselink_T: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

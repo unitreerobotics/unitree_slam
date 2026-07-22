@@ -1,0 +1,8 @@
+{
+  "Participant":
+  {
+    "DomainId": 0,
+    "Config": "/unitree/etc/cyclonedds.xml",
+    "Config_": "../config/slam_interfaces_server_config/cyclonedds.xml"
+  }
+}

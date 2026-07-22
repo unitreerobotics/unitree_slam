@@ -1,0 +1,207 @@
+R1:
+  grid_map:
+    revolution: 0.1  # 分辨率 （m）
+    wide: 4.0         # 宽度 （m）
+    T_Dog2lidar: [0.0 ,0.0, 0.0 ,0.0 , 0.785, 0.0]  # xyz rpy （m） 向前倾斜45度（todo重力对齐）
+    lidar_height: 1.28  # 高度 （m）
+
+    point_cloud_topic: "rt/unitree/slam_lidar/points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [0.05, 0.2, 4]  # x_min x_max resolution
+    collision_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [0.05, 0.4 , 5] #  x_min x_max resolution
+    warning_y_range: [-0.2, 0.2, 5] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+A2:
+  grid_map:
+    revolution: 0.1   # 分辨率 （m）
+    wide: 5.0         # 宽度 （m）
+    T_Dog2lidar: [0.415, 0.0, 0.04, 1.57, 0.0, 1.57]  # xyz rpy （m）
+    lidar_height: 0.7  # 高度 （m）
+    point_cloud_topic_map: "rt/unitree/slam_relocation/points"
+    point_cloud_topic: "rt/unitree/slam_lidar/points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.3, 0.3, 8]  # x_min x_max resolution
+    collision_y_range: [-0.15, 0.15, 4] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.35, 0.6 , 10] # x_min x_max resolution
+    warning_y_range: [-0.2, 0.2, 5] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+
+A2_W:
+  grid_map:
+    revolution: 0.1   # 分辨率 （m）
+    wide: 4.0         # 宽度 （m）
+    T_Dog2lidar: [0.415, 0.0, 0.04, 1.57, 0.0, 1.57]  # xyz rpy （m）
+    lidar_height: 0.7  # 高度 （m）
+    point_cloud_topic_map: "rt/unitree/slam_relocation/points"
+    point_cloud_topic: "rt/unitree/slam_lidar/points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.3, 0.3, 8]  # x_min x_max resolution
+    collision_y_range: [-0.15, 0.15, 4] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.35, 0.6 , 10] # x_min x_max resolution
+    warning_y_range: [-0.2, 0.2, 5] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+B2:
+  grid_map:
+    revolution: 0.05   # 分辨率 （m）
+    wide: 12.0         # 宽度 （m）
+    T_Dog2lidar: [0.415 ,0.0, 0.04,0.0 ,0.0, 0.0]  # xyz rpy （m）
+    lidar_height: 0.7  # 高度 （m）
+    point_cloud_topic: "rt/rslidar_points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/lio_sam_ros2/mapping/re_location_odometry"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.3, 0.3, 8]  # x_min x_max resolution
+    collision_y_range: [-0.15, 0.15, 4] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.35, 0.6 , 10] # x_min x_max resolution
+    warning_y_range: [-0.2, 0.2, 5] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+B2_W:
+  grid_map:
+    revolution: 0.05   # 分辨率 （m）
+    wide: 12.0         # 宽度 （m）
+    T_Dog2lidar: [0.415 ,0.0, 0.04,0.0 ,0.0, 0.0]  # xyz rpy （m）
+    lidar_height: 0.8  # 高度 （m）
+    point_cloud_topic: "rt/rslidar_points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/lio_sam_ros2/mapping/re_location_odometry"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.3, 0.3, 8]  # x_min x_max resolution
+    collision_y_range: [-0.15, 0.15, 4] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.35, 0.35 , 10] # x_min x_max resolution
+    warning_y_range: [-0.25, 0.25, 6] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+G1:
+  grid_map:
+    revolution: 0.1  # 分辨率 （m）
+    wide: 4.0         # 宽度 （m）
+    T_Dog2lidar: [0.0 ,0.0, 0.0 ,3.1415926 ,0.0, 0.0]  # xyz rpy （m）
+    lidar_height: 1.28  # 高度 （m）
+
+    point_cloud_topic_map: "rt/unitree/slam_relocation/points"
+    point_cloud_topic: "rt/utlidar/cloud_livox_mid360"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [0.05, 0.2, 4]  # x_min x_max resolution
+    collision_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [0.05, 0.6 , 5] #  x_min x_max resolution
+    warning_y_range: [-0.25, 0.24, 5] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+
+Go2_W:
+  grid_map:
+    revolution: 0.05   # 分辨率 （m）
+    wide: 6.0         # 宽度 （m）
+    T_Dog2lidar: [0.0 ,0.0, 0.0 ,0.0 ,0.226, 0.0]  # xyz rpy （m）
+    lidar_height: 0.4  # 高度 （m）
+    point_cloud_topic: "rt/unitree/slam_lidar/points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.2, 0.2, 5]  # x_min x_max resolution
+    collision_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.2, 0.3 , 5] # x_min x_max resolution
+    warning_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"
+
+Go2:
+  grid_map:
+    revolution: 0.1   # 分辨率 （m）
+    wide: 8.0         # 宽度 
+    T_Dog2lidar: [ 0.1701 ,0.0, 0.0908 ,0.0 ,0.0 , 1.57 ]  # xyz rpy （m）xt16
+    # T_Dog2lidar: [ 0.0 ,0.0, 0.0 ,0.0 ,0.226 , 0.0 ]  # xyz rpy （m）mid360
+    lidar_height: 0.4  # 高度 （m）
+    point_cloud_topic: "rt/unitree/slam_lidar/points"
+    #odom_topic: "rt/dog_odom"   # base odom (not lidar link)
+    odom_topic: "rt/unitree/slam_relocation/odom"
+    gridmap_topic: "rt/gridmap"
+    ## 碰撞检测 为了保证安全，应当设置比机器人大一点，触发会急停
+    collision_x_range: [-0.2, 0.2, 5]  # x_min x_max resolution
+    collision_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 需要大于碰撞检测范围，进行潜在碰撞的预警
+    warning_x_range: [-0.2, 0.3 , 5] # x_min x_max resolution
+    warning_y_range: [-0.05, 0.05, 3] # y_min y_max resolution
+
+    ## 预警范围 会根据当前速度推测未来机器人位置，进行潜在碰撞的预警
+    predict_num: 3 #预测未来碰撞风险 步数
+    predict_time: 2.0 #预测未来碰撞时间
+
+    ## 日志路径
+    log_path: "logs/gridmap/"

@@ -1,0 +1,36 @@
+G1:
+  point_filter_num: 2
+  feature_extract_enabled: false 
+  lidar_time_offset: 0.0
+  imu_time_offset: 0.0
+  maxAttempts: 100
+  imu_buffer_max: 500
+  lid_buffer_max: 20
+  odom_buffer_max: 20000
+A2:
+  point_filter_num: 2
+  feature_extract_enabled: false 
+  lidar_time_offset: 0.0
+  imu_time_offset: 0.0
+  maxAttempts: 100
+  imu_buffer_max: 500
+  lid_buffer_max: 20
+  odom_buffer_max: 20000
+B2:
+  point_filter_num: 2
+  feature_extract_enabled: false 
+  lidar_time_offset: 0.0
+  imu_time_offset: 0.0
+  maxAttempts: 100
+  imu_buffer_max: 500
+  lid_buffer_max: 20
+  odom_buffer_max: 20000
+B2_W:
+  point_filter_num: 2
+  feature_extract_enabled: false 
+  lidar_time_offset: 0.0
+  imu_time_offset: 0.0
+  maxAttempts: 100
+  imu_buffer_max: 500
+  lid_buffer_max: 20
+  odom_buffer_max: 20000
