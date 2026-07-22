@@ -1,0 +1,13 @@
+uint16[] edge_name
+uint16[] start_node_name
+uint16[] end_node_name
+float32[] edge_length
+uint16[] dog_stats
+uint16[] dog_back_stats
+float32[] dog_speed
+uint16[] edge_state
+float32[] edge_state_1
+uint16[] edge_state_2
+uint16[] edge_state_3
+uint16[] edge_state_4
+std_msgs/Float32MultiArray[] edge_state_list
