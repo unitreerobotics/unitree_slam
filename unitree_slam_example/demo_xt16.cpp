@@ -241,13 +241,13 @@ void slamDemo::addNodeAndEdge()
 
     nodeTemp.nodeX = currentOdom->pose().pose().position().x();
     nodeTemp.nodeY = currentOdom->pose().pose().position().y();
-    nodeTemp.nodeZ = 0;
+    nodeTemp.nodeZ = currentOdom->pose().pose().position().z();
     nodeTemp.nodeYaw = std::atan2(siny_cosp, cosy_cosp);
     nodeTemp.nodeName = node_name;
 
     nodeAttributeList.push_back(nodeTemp);
 
-    cout << "Add Node.   Name: " << node_name << "  X:" << nodeTemp.nodeX << "  Y:" << nodeTemp.nodeY << "  Z:" << nodeTemp.nodeZ << "  Yaw:" << nodeTemp.nodeYaw << endl;
+    cout << "Add Node.   Name: " << node_name << "  X:" << nodeTemp.nodeX << "  Y:" << nodeTemp.nodeY << "  Z:" << nodeTemp.nodeY << "  Yaw:" << nodeTemp.nodeYaw << endl;
     if (node_name >= 2)
         addEdge(node_name - 1, node_name - 1, node_name); // Sequential connection nodes
 }
@@ -301,7 +301,7 @@ void slamDemo::saveNodeAndEdge()
         edgeMsg.edge_().start_node_name_().push_back(edgeAttributeList[i].edgeStart); // Start node name
         edgeMsg.edge_().end_node_name_().push_back(edgeAttributeList[i].edgeEnd);     // End node name
         edgeMsg.edge_().edge_length_().push_back(0);
-        edgeMsg.edge_().dog_speed_().push_back(0.5);    // The speed of the dog walking this edge (0-1)
+        edgeMsg.edge_().dog_speed_().push_back(1);    // The speed of the dog walking this edge (0-1)
         edgeMsg.edge_().edge_state_2_().push_back(0); // 0：Stop 1：Avoid 3：Replan  when encountering obstacles. Suggest assigning a value of 0.
 
         edgeMsg.edge_().dog_stats_().push_back(0); // Not open attribute, please assign a value of 0, note: cannot be empty!!! Cannot be empty!!! Cannot be empty!!!

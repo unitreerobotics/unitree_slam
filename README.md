@@ -2,12 +2,12 @@
 
 ### Build examples
 ```bash
-# Build and run
+# Install unitree_sdk2    https://github.com/unitreerobotics
+sudo ./install.sh 
+
+# Build examples
 mkdir build				
 cd build
 cmake ..
 make
-export LD_LIBRARY_PATH=$PWD/../unitree_robotics/lib/$(uname -m):$LD_LIBRARY_PATH 
-./demo_h1 eth0   #eth0 is the network interface name for the subnet 123.
 ```
-

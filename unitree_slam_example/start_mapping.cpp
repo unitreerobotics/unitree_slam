@@ -17,7 +17,7 @@ int main(int argc, const char **argv)
     unitree_interfaces::msg::dds_::QtCommand_ send_msg;
 
     send_msg.command_() = 3;               // 3 is to start mapping command
-    send_msg.attribute_() = 2; //GO2: When this value is 1, the XT16 LiDAR node is enabled, and when it is 2, the MID360 LiDAR node is enabled.Please confirm the value based on the actual LiDAR being.  B2:Please provide a fixed value of 0.
+    send_msg.attribute_() = 0; //GO2: When this value is 1, the XT16 LiDAR node is enabled, and when it is 2, the MID360 LiDAR node is enabled.Please confirm the value based on the actual LiDAR being.  B2:Please provide a fixed value of 0.
     send_msg.seq_().data() = "index:123;"; // The value 123 is set by the user (1-10000).
 
     publisher->Write(send_msg);

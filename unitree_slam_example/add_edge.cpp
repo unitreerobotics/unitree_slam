@@ -22,8 +22,8 @@ int main(int argc, const char **argv)
     send_msg.edge_().edge_name_().push_back(1);       // Edge name
     send_msg.edge_().start_node_name_().push_back(0); // Start node name
     send_msg.edge_().end_node_name_().push_back(1);   // End node name
-    send_msg.edge_().dog_speed_().push_back(1);       
-    send_msg.edge_().edge_state_2_().push_back(0);    
+    send_msg.edge_().dog_speed_().push_back(1);       // The speed of the dog walking this edge (0-1), it is recommended to assign a value of 1
+    send_msg.edge_().edge_state_2_().push_back(0);    // 0：Stop 1：Avoid 3：Replan   when encountering obstacles.Suggest assigning a value of 0.
 
     send_msg.edge_().dog_stats_().push_back(0); // Not open attribute, please assign a value of 0, note: cannot be empty!!! Cannot be empty!!! Cannot be empty!!!
     send_msg.edge_().edge_length_().push_back(0);

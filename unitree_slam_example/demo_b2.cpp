@@ -239,13 +239,13 @@ void slamDemo::addNodeAndEdge()
 
     nodeTemp.nodeX = currentOdom->pose().pose().position().x();
     nodeTemp.nodeY = currentOdom->pose().pose().position().y();
-    nodeTemp.nodeZ = 0;
+    nodeTemp.nodeZ = currentOdom->pose().pose().position().z();
     nodeTemp.nodeYaw = std::atan2(siny_cosp, cosy_cosp);
     nodeTemp.nodeName = node_name;
 
     nodeAttributeList.push_back(nodeTemp);
 
-    cout << "Add Node.   Name: " << node_name << "  X:" << nodeTemp.nodeX << "  Y:" << nodeTemp.nodeY << "  Z:" << nodeTemp.nodeZ << "  Yaw:" << nodeTemp.nodeYaw << endl;
+    cout << "Add Node.   Name: " << node_name << "  X:" << nodeTemp.nodeX << "  Y:" << nodeTemp.nodeY << "  Z:" << nodeTemp.nodeY << "  Yaw:" << nodeTemp.nodeYaw << endl;
     if (node_name >= 2)
         addEdge(node_name - 1, node_name - 1, node_name); // Sequential connection nodes
 }
