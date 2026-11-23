@@ -1,3 +1,36 @@
+# Offline obstacle-response event replay
+
+This example replays single-waypoint events to check transitions through obstacle holding, recovery acknowledgement and continued arrival. The input example uses synthetic events.
+
+## Run
+With Python 3.8+ and the standard library:
+```bash
+python3 tools/inspection_replay.py examples/inspection/recovery.json
+python3 -B -m unittest discover -s tests -p test_inspection_replay.py -v
+```
+Exit codes: 0 = replay reports COMPLETED; 1 = fault, cancellation or unfinished log; 2 = input/read error. JSON records states and transition reasons.
+
+## Input format
+Top-level fields: schema=1, mission_id, waypoint_id, timeout_s and events.
+Each event contains a nonnegative integer seq, finite nonnegative t_s on the same monotonic clock, matching mission_id/waypoint_id and event. Adapters translate feedback such as qt_notice into these events.
+- NAVIGATING + near_stop → HOLDING.
+- HOLDING + clearance → RESUME_REQUESTED; resume_ack returns to NAVIGATING.
+- HOLDING + persistent_blockage → RECOVERY_REQUESTED; recovery_done enters VERIFYING; resume_ack returns to NAVIGATING.
+- Only NAVIGATING accepts arrived → COMPLETED, completing this waypoint's workflow.
+- cancel → CANCELLED; localization_lost/transport_lost → FAULTED.
+- Repeated identical sequence/content pairs are ignored. Before termination, conflicting sequences, out-of-order events, regressing time, identity mismatches and invalid transitions produce FAULTED.
+- Entering a waiting state sets its deadline to event time plus timeout_s. Any new event at or beyond the deadline produces FAULTED. tick advances event time. Deadline handling takes precedence over other events at that timestamp.
+- Terminal states remain unchanged; subsequent events are recorded as ignored. Truncated logs are marked incomplete.
+
+## Usage notes
+The tool processes offline events and state transitions. Real-time integration needs message adaptation, command acknowledgement and a timer; input events or tick advance timeout checks.
+FAULTED is an application event state; the running system should confirm the robot's stop. Multi-waypoint scheduling and real-time event processing are possible extensions.
+The example timeout_s=10 illustrates deadline behavior; configure it to suit the mission.
+
+---
+
+# 中文
+
 # 障碍响应离线事件回放示例
 
 本示例通过单路点事件回放，检查障碍等待、恢复确认和续行到达的状态转换。输入样例使用合成事件。
