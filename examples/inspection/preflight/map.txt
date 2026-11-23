@@ -1,0 +1,2 @@
+Synthetic map identifier only; this is not a point cloud.
+
