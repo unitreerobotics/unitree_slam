@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "mission_id": "synthetic",
+  "waypoint_id": "one",
+  "timeout_s": 10,
+  "events": [
+    {
+      "seq": 0,
+      "t_s": 0,
+      "event": "near_stop",
+      "mission_id": "synthetic",
+      "waypoint_id": "one"
+    },
+    {
+      "seq": 1,
+      "t_s": 1,
+      "event": "persistent_blockage",
+      "mission_id": "synthetic",
+      "waypoint_id": "one"
+    },
+    {
+      "seq": 2,
+      "t_s": 2,
+      "event": "recovery_done",
+      "mission_id": "synthetic",
+      "waypoint_id": "one"
+    },
+    {
+      "seq": 3,
+      "t_s": 3,
+      "event": "resume_ack",
+      "mission_id": "synthetic",
+      "waypoint_id": "one"
+    },
+    {
+      "seq": 4,
+      "t_s": 4,
+      "event": "arrived",
+      "mission_id": "synthetic",
+      "waypoint_id": "one"
+    }
+  ]
+}
+
