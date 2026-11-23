@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "units": "m",
+  "frame_id": "synthetic_map",
+  "directed": true,
+  "return_required": true,
+  "map": {
+    "file": "map.txt",
+    "sha256": "a16d0623cc3aa64c07fef01e638ebc10c909653e7d78ce26bed6f91ba1343272"
+  },
+  "config": {
+    "file": "config.json",
+    "sha256": "9331f3fe7ef34b137bc95bc4182b49993433aa6ee2f4018a74cece23f49e6ea7"
+  },
+  "nodes": [
+    {
+      "id": 1,
+      "xyz": [
+        1,
+        0,
+        0
+      ],
+      "yaw_rad": 0
+    },
+    {
+      "id": 2,
+      "xyz": [
+        2,
+        0,
+        0
+      ],
+      "yaw_rad": 0
+    }
+  ],
+  "edges": [
+    {
+      "from": 1,
+      "to": 2,
+      "enabled": true
+    },
+    {
+      "from": 2,
+      "to": 1,
+      "enabled": true
+    }
+  ],
+  "visit_order": [
+    1,
+    2
+  ],
+  "targets": [
+    {
+      "id": "synthetic_target",
+      "node_id": 2
+    }
+  ]
+}
